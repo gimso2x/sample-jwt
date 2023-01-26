@@ -8,3 +8,7 @@ export interface AuthType {
 export const postSignUp = (data: AuthType) => {
   return api.post('/auth/register', data)
 }
+
+export const postSignIn = (data: AuthType) => {
+  return api.post('/auth/login', data)
+}
