@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Main from './components/views/Main'
+import Main from '../components/views/Main'
 
 export default function Home() {
   return (

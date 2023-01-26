@@ -1,4 +1,4 @@
-import SignIn from './components/views/SignIn'
+import SignIn from '../components/views/SignIn'
 
 const SignInPage = () => <SignIn />
 

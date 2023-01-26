@@ -6,7 +6,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import Layout from './components/common/Layout'
+import Layout from '../components/common/Layout'
 
 const queryClient = new QueryClient({
   defaultOptions: {
