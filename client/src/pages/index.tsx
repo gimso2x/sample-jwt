@@ -1,7 +1,5 @@
-import Head from "next/head";
-
-var foo = 5;
-var bar = 3;
+import Head from 'next/head'
+import Main from './components/views/Main'
 
 export default function Home() {
   return (
@@ -9,7 +7,7 @@ export default function Home() {
       <Head>
         <title>Create Next App</title>
       </Head>
-      <button className="btn">Hello daisyUI</button>
+      <Main />
     </div>
-  );
+  )
 }
