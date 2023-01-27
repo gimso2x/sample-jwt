@@ -1,9 +1,8 @@
 import Link from 'next/link'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 const Nav = () => {
   const router = useRouter()
-
   return (
     <nav className="navbar bg-base-100">
       <div className="flex-1">

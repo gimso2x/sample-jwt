@@ -5,9 +5,13 @@ import { useForm } from 'react-hook-form'
 import { AuthType, postSignIn } from '../../../services/auth'
 import { CACHE_KEYS } from '../../../services/cacheKeys'
 import { setCookie } from 'cookies-next'
+import api from '../../../services/api'
+import { useStoreActions } from '../../../store/auth'
 
 const SignIn = () => {
   const router = useRouter()
+  const { setAuth } = useStoreActions()
+
   const {
     register,
     handleSubmit,
@@ -20,10 +24,13 @@ const SignIn = () => {
   }
 
   const { mutate } = useMutation(CACHE_KEYS.singIn, postSignIn, {
-    onSuccess: ({ data }) => {
-      setCookie('accessToken', data.accessToken)
-      setCookie('refreshToken', data.refreshToken)
-      router.push('/')
+    onSuccess: (response) => {
+      setCookie('accessToken', response.accessToken)
+      setCookie('refreshToken', response.refreshToken)
+      api.defaults.headers.common[
+        'Authorization'
+      ] = `Bearer ${response.accessToken}`
+      router.replace('/')
     },
     onError: (err) => {
       if (isAxiosError(err)) {
