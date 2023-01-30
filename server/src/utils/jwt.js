@@ -7,12 +7,16 @@ function generateAccessToken(user) {
 }
 
 function generateRefreshToken(user, jti) {
-  return jwt.sign({
-    userId: user.id,
-    jti
-  }, process.env.JWT_REFRESH_SECRET, {
-    expiresIn: '4h',
-  });
+  return jwt.sign(
+    {
+      userId: user.id,
+      jti,
+    },
+    process.env.JWT_REFRESH_SECRET,
+    {
+      expiresIn: '10m',
+    }
+  );
 }
 
 function generateTokens(user, jti) {
@@ -28,5 +32,5 @@ function generateTokens(user, jti) {
 module.exports = {
   generateAccessToken,
   generateRefreshToken,
-  generateTokens
+  generateTokens,
 };

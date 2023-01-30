@@ -1,21 +1,22 @@
 import { create } from 'zustand'
-import { TokenType } from '../services/auth'
 
 interface StoreType {
-  auth: {} | TokenType
+  auth: boolean
   actions: {
-    setAuth: (auth: TokenType) => void
+    setAuth: (auth: boolean) => void
     clearAuth: () => void
   }
 }
 
 export const useAuthStore = create<StoreType>((set) => ({
-  auth: {},
+  auth: false,
   actions: {
-    setAuth: (auth: TokenType) => set({ auth }),
-    clearAuth: () => set({ auth: {} }),
+    setAuth: (auth: boolean) => {
+      set({ auth })
+    },
+    clearAuth: () => set({ auth: false }),
   },
 }))
 
-export const useStoreAuth = () => useAuthStore((state) => state.auth)
-export const useStoreActions = () => useAuthStore((state) => state.actions)
+export const useAuthStoreValue = () => useAuthStore((state) => state.auth)
+export const useAuthStoreActions = () => useAuthStore((state) => state.actions)

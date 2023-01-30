@@ -1,5 +1,4 @@
 import { ReactNode } from 'react'
-import { useStoreAuth } from '../../../store/auth'
 import Nav from './Nav'
 
 interface Props {

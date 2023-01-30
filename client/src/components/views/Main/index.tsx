@@ -10,7 +10,6 @@ const Main = () => {
   })
 
   useEffect(() => {
-    console.log('test')
     setPageLoad(true)
   }, [])
 

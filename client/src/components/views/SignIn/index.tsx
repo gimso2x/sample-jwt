@@ -6,11 +6,11 @@ import { AuthType, postSignIn } from '../../../services/auth'
 import { CACHE_KEYS } from '../../../services/cacheKeys'
 import { setCookie } from 'cookies-next'
 import api from '../../../services/api'
-import { useStoreActions } from '../../../store/auth'
+import { useAuthStoreActions } from '../../../store/auth'
 
 const SignIn = () => {
   const router = useRouter()
-  const { setAuth } = useStoreActions()
+  const { setAuth } = useAuthStoreActions()
 
   const {
     register,
@@ -30,6 +30,7 @@ const SignIn = () => {
       api.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${response.accessToken}`
+      setAuth(true)
       router.replace('/')
     },
     onError: (err) => {
