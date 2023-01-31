@@ -29,7 +29,7 @@ const queryClient = new QueryClient({
             if (err.response?.data?.message === 'jwt expired') {
               destroyToken()
               queryClient.removeQueries(CACHE_KEYS.profile)
-              // window.location.href = '/'
+              window.location.href = '/'
             }
           }
         }

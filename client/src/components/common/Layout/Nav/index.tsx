@@ -24,6 +24,9 @@ const Nav = () => {
         <Link href="/" className="btn btn-ghost normal-case text-xl">
           Sample-JWT
         </Link>
+        <Link href="/authPage" className="btn btn-ghost normal-case text-xl">
+          authPage
+        </Link>
       </div>
       <div className="flex-none">
         {data ? (

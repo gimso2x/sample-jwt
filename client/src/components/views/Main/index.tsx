@@ -3,9 +3,9 @@ import { CACHE_KEYS } from '../../../services/cacheKeys'
 import { getProfile } from '../../../services/users'
 
 const Main = () => {
-  // const { data, isLoading } = useQuery(CACHE_KEYS.profile, getProfile)
-  const data = undefined
-  const isLoading = false
+  const { data, isLoading } = useQuery(CACHE_KEYS.profile, getProfile)
+  // const data = undefined
+  // const isLoading = false
 
   return (
     <div className="hero bg-base-200">
