@@ -1,12 +1,22 @@
+import { getProfile } from '@/services/users'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useAuthStoreValue } from '../../../../store/auth'
-import { destroyToken } from '../../../../utils/auth'
-import useCurrentUser from '../../../../utils/hooks/useCurrentUser'
+import { CACHE_KEYS } from '@/services/cacheKeys'
+import { destroyToken } from '@/utils/auth'
 
 const Nav = () => {
   const router = useRouter()
-  const user = useCurrentUser()
+  const client = useQueryClient()
+  const { data, isLoading } = useQuery(CACHE_KEYS.profile, getProfile, {
+    enabled: router.pathname !== '/signIn',
+  })
+
+  const logoutAction = () => {
+    destroyToken()
+    client.removeQueries(CACHE_KEYS.profile)
+    router.push('/signIn')
+  }
 
   return (
     <nav className="navbar bg-base-100">
@@ -16,14 +26,8 @@ const Nav = () => {
         </Link>
       </div>
       <div className="flex-none">
-        {user ? (
-          <button
-            className="btn btn-secondary"
-            onClick={() => {
-              destroyToken()
-              router.push('/signIn')
-            }}
-          >
+        {data ? (
+          <button className="btn btn-secondary" onClick={logoutAction}>
             로그아웃
           </button>
         ) : (

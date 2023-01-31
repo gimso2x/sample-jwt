@@ -10,6 +10,9 @@ import Layout from '../components/common/Layout'
 import { useEffect } from 'react'
 import { getCookie } from 'cookies-next'
 import { useAuthStoreActions } from '../store/auth'
+import { isAxiosError } from 'axios'
+import { destroyToken } from '@/utils/auth'
+import { CACHE_KEYS } from '@/services/cacheKeys'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,6 +21,19 @@ const queryClient = new QueryClient({
       retryOnMount: false,
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
+
+      onError: (err) => {
+        if (isAxiosError(err)) {
+          if (err.response?.data) {
+            console.log(err.response?.data?.message)
+            if (err.response?.data?.message === 'jwt expired') {
+              destroyToken()
+              queryClient.removeQueries(CACHE_KEYS.profile)
+              // window.location.href = '/'
+            }
+          }
+        }
+      },
     },
   },
 })

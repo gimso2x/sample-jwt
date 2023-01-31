@@ -1,17 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
 import { CACHE_KEYS } from '../../../services/cacheKeys'
 import { getProfile } from '../../../services/users'
 
 const Main = () => {
-  const [pageLoad, setPageLoad] = useState(false)
-  const { data, isLoading } = useQuery(CACHE_KEYS.profile, getProfile, {
-    enabled: pageLoad,
-  })
-
-  useEffect(() => {
-    setPageLoad(true)
-  }, [])
+  // const { data, isLoading } = useQuery(CACHE_KEYS.profile, getProfile)
+  const data = undefined
+  const isLoading = false
 
   return (
     <div className="hero bg-base-200">

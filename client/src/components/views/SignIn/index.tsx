@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { isAxiosError } from 'axios'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
@@ -6,11 +6,10 @@ import { AuthType, postSignIn } from '../../../services/auth'
 import { CACHE_KEYS } from '../../../services/cacheKeys'
 import { setCookie } from 'cookies-next'
 import api from '../../../services/api'
-import { useAuthStoreActions } from '../../../store/auth'
 
 const SignIn = () => {
   const router = useRouter()
-  const { setAuth } = useAuthStoreActions()
+  const client = useQueryClient()
 
   const {
     register,
@@ -30,7 +29,7 @@ const SignIn = () => {
       api.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${response.accessToken}`
-      setAuth(true)
+      // client.setQueryData(CACHE_KEYS.profile, response)
       router.replace('/')
     },
     onError: (err) => {
